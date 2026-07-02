@@ -1,36 +1,46 @@
-import * as path from 'node:path';
-import { defineConfig } from '@rspress/core';
+import * as path from "node:path";
+import { defineConfig } from "@rspress/core";
+import { transformerCompatibleMetaHighlight } from "@rspress/core/shiki-transformers";
+import { pluginPreview } from "@rspress/plugin-preview";
+import { pluginPlayground } from "@rspress/plugin-playground";
 
 export default defineConfig({
-  root: path.join(__dirname, 'docs'),
-  title: 'My Site',
-  description: 'A multilingual Rspress documentation site.',
-  lang: 'en',
-  icon: '/rspress-icon.png',
-  logo: {
-    light: '/rspress-light-logo.png',
-    dark: '/rspress-dark-logo.png',
+  llms: true,
+  markdown: {
+    shiki: {
+      transformers: [transformerCompatibleMetaHighlight()],
+    },
   },
+  plugins: [pluginPreview(), pluginPlayground()],
+  root: path.join(__dirname, "docs"),
+  description: "A multilingual Rspress documentation site.",
+  lang: "en",
+  icon: "/favicon.ico",
+  logo: "/favicon.ico",
+  logoText: "Zustand",
   locales: [
     {
-      lang: 'en',
-      label: 'English',
-      title: 'My Site',
-      description: 'A multilingual Rspress documentation site.',
-    },
-    {
-      lang: 'zh',
-      label: '简体中文',
-      title: '我的站点',
-      description: '一个多语言 Rspress 文档站点。',
+      lang: "en",
+      label: "English",
+      title: "Zustand Docs",
+      description: "A multilingual Rspress documentation site.",
     },
   ],
   themeConfig: {
+    editLink: {
+      docRepoBaseUrl:
+        "https://github.com/zustandjs/zustand-website/tree/main/docs",
+    },
     socialLinks: [
       {
-        icon: 'github',
-        mode: 'link',
-        content: 'https://github.com/web-infra-dev/rspress',
+        icon: "github",
+        mode: "link",
+        content: "https://github.com/pmndrs/zustand",
+      },
+      {
+        icon: "npm",
+        mode: "link",
+        content: "https://www.npmjs.com/package/zustand",
       },
     ],
   },

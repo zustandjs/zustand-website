@@ -1,0 +1,8 @@
+[
+  { "type": "file", "name": "persist", "label": "persist" },
+  { "type": "file", "name": "devtools", "label": "devtools" },
+  { "type": "file", "name": "redux", "label": "redux" },
+  { "type": "file", "name": "immer", "label": "immer" },
+  { "type": "file", "name": "combine", "label": "combine" },
+  { "type": "file", "name": "subscribe-with-selector", "label": "subscribeWithSelector" }
+]

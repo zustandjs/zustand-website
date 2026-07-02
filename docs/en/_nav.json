@@ -1,16 +1,12 @@
 [
   {
-    "text": "Guide",
-    "link": "/guide/start/introduction",
-    "activeMatch": "/guide/"
+    "text": "Learn",
+    "link": "/learn",
+    "activeMatch": "/learn/"
   },
   {
-    "text": "API",
-    "link": "/api/",
-    "activeMatch": "/api/"
-  },
-  {
-    "text": "Document",
-    "link": "https://rspress.rs/"
+    "text": "Reference",
+    "link": "/reference",
+    "activeMatch": "/reference/"
   }
 ]

@@ -1,0 +1,6 @@
+[
+  { "type": "file", "name": "create", "label": "create", "tag": "react" },
+  { "type": "file", "name": "create-store", "label": "createStore" },
+  { "type": "file", "name": "create-with-equality-fn", "label": "createWithEqualityFn", "tag": "react" },
+  { "type": "file", "name": "shallow", "label": "shallow" }
+]

@@ -1,0 +1,5 @@
+[
+  { "type": "file", "name": "use-store", "label": "useStore", "tag": "react" },
+  { "type": "file", "name": "use-store-with-equality-fn", "label": "useStoreWithEqualityFn", "tag": "react" },
+  { "type": "file", "name": "use-shallow", "label": "useShallow", "tag": "react" }
+]

@@ -1,0 +1,5 @@
+[
+  { "type": "file", "name": "persisting-store-data", "label": "Persisting store data" },
+  { "type": "file", "name": "immer-middleware", "label": "Immer middleware" },
+  { "type": "file", "name": "third-party-libraries", "label": "Third-party libraries" }
+]
