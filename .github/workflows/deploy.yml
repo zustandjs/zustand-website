@@ -1,76 +1,43 @@
-name: Deploy Main
+name: Deploy Pages
 
 on:
   push:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pr-preview-main
-  cancel-in-progress: false
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  deploy-main:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v7
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
         with:
           version: latest
           cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: doc_build
 
-      - name: Install deps
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm build --base="/latest/"
-
-      - name: Deploy to gh-pages latest/
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          if git ls-remote --exit-code --heads origin gh-pages > /dev/null 2>&1; then
-            git fetch origin +gh-pages:gh-pages
-            git worktree add /tmp/gh-pages-wt gh-pages
-          else
-            git worktree add --orphan -b gh-pages /tmp/gh-pages-wt
-          fi
-
-          cd /tmp/gh-pages-wt
-
-          # main only ever writes to latest/, so PR preview folders (pr-*/)
-          # at the root are never touched by this job.
-          rm -rf latest
-          mkdir -p latest
-          cp -r "${GITHUB_WORKSPACE}/doc_build/." latest/
-          touch .nojekyll
-
-          git add -A
-
-          if git diff --cached --quiet; then
-            echo "No changes to deploy"
-          else
-            git commit -m "deploy: production from main (${GITHUB_SHA::7})"
-
-            for i in 1 2 3 4 5; do
-              if git pull --rebase origin gh-pages && git push origin gh-pages; then
-                break
-              fi
-              echo "Push failed, retrying (${i}/5)..."
-              sleep $((RANDOM % 5 + 1))
-              if [ "$i" -eq 5 ]; then
-                echo "::error::Failed to push production deploy after 5 attempts"
-                exit 1
-              fi
-            done
-          fi
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
