@@ -52,7 +52,7 @@ jobs:
           # at the root are never touched by this job.
           rm -rf latest
           mkdir -p latest
-          cp -r "${GITHUB_WORKSPACE}/dist/." latest/
+          cp -r "${GITHUB_WORKSPACE}/doc_build/." latest/
           touch .nojekyll
 
           git add -A
