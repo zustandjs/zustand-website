@@ -1,4 +1,3 @@
-import * as path from "node:path";
 import { defineConfig } from "@rspress/core";
 import { transformerCompatibleMetaHighlight } from "@rspress/core/shiki-transformers";
 import { pluginPreview } from "@rspress/plugin-preview";
@@ -10,9 +9,13 @@ export default defineConfig({
     shiki: {
       transformers: [transformerCompatibleMetaHighlight()],
     },
+    link: {
+      checkDeadLinks: true,
+      checkAnchors: true,
+    },
   },
   plugins: [pluginPreview(), pluginPlayground()],
-  root: path.join(__dirname, "docs"),
+  root: 'docs',
   description: "A multilingual Rspress documentation site.",
   lang: "en",
   icon: "/favicon.ico",

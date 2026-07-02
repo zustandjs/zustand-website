@@ -4,9 +4,7 @@ description: How to use Zustand
 nav: 1
 ---
 
-<div class="flex justify-center mb-4">
-<img src="/bear.jpg" alt="Logo Zustand" />
-</div>
+![Logo Zustand](./bear.jpg)
 
 A small, fast, and scalable bearbones state management solution.
 Zustand has a comfy API based on hooks.
