@@ -1,0 +1,84 @@
+name: PR Preview Cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Remove preview directory
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Nothing to clean up if gh-pages was never created (e.g. PR closed
+          # before any preview build ever succeeded).
+          if ! git ls-remote --exit-code --heads origin gh-pages > /dev/null 2>&1; then
+            echo "gh-pages branch does not exist on remote. Nothing to clean up."
+            exit 0
+          fi
+
+          git fetch origin +gh-pages:gh-pages
+          git worktree add /tmp/gh-pages-wt gh-pages
+
+          cd /tmp/gh-pages-wt
+
+          if [ -d "pr-${PR_NUMBER}" ]; then
+            git rm -rf "pr-${PR_NUMBER}"
+            git commit -m "chore: remove preview for PR #${PR_NUMBER}"
+
+            for i in 1 2 3 4 5; do
+              if git pull --rebase origin gh-pages && git push origin gh-pages; then
+                echo "Successfully removed preview directory."
+                break
+              fi
+              echo "Push failed, retrying (${i}/5)..."
+              sleep $((RANDOM % 5 + 1))
+              if [ "$i" -eq 5 ]; then
+                echo "::error::Failed to push cleanup after 5 attempts"
+                exit 1
+              fi
+            done
+          else
+            echo "No preview directory found for PR #${PR_NUMBER}, nothing to remove"
+          fi
+
+          # Non-fatal: runner is destroyed right after this job anyway.
+          cd "$GITHUB_WORKSPACE"
+          git worktree remove /tmp/gh-pages-wt || true
+
+      - name: Update PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          MARKER="<!-- pr-preview-action -->"
+
+          existing=$(gh api "repos/${OWNER}/${REPO}/issues/${PR_NUMBER}/comments" \
+            --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n1)
+
+          if [ -n "$existing" ]; then
+            BODY=$(printf '%s\n🗑️ Preview removed (PR closed).' "$MARKER")
+            gh api -X PATCH "repos/${OWNER}/${REPO}/issues/comments/${existing}" -f body="$BODY"
+          fi
