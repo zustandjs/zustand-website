@@ -93,9 +93,7 @@ const { create: actualCreate, createStore: actualCreateStore } =
 // a variable to hold reset functions for all stores declared in the app
 export const storeResetFns = new Set<() => void>()
 
-const createUncurried = <T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+const createUncurried = <T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   const store = actualCreate(stateCreator)
   const initialState = store.getInitialState()
   storeResetFns.add(() => {
@@ -105,20 +103,14 @@ const createUncurried = <T>(
 }
 
 // when creating a store, we get its initial state, create a reset function and add it in the set
-export const create = (<T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+export const create = (<T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   console.log('zustand create mock')
 
   // to support curried version of create
-  return typeof stateCreator === 'function'
-    ? createUncurried(stateCreator)
-    : createUncurried
+  return typeof stateCreator === 'function' ? createUncurried(stateCreator) : createUncurried
 }) as typeof ZustandExportedTypes.create
 
-const createStoreUncurried = <T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+const createStoreUncurried = <T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   const store = actualCreateStore(stateCreator)
   const initialState = store.getInitialState()
   storeResetFns.add(() => {
@@ -128,9 +120,7 @@ const createStoreUncurried = <T>(
 }
 
 // when creating a store, we get its initial state, create a reset function and add it in the set
-export const createStore = (<T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+export const createStore = (<T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   console.log('zustand createStore mock')
 
   // to support curried version of createStore
@@ -191,9 +181,7 @@ const { create: actualCreate, createStore: actualCreateStore } =
 // a variable to hold reset functions for all stores declared in the app
 export const storeResetFns = new Set<() => void>()
 
-const createUncurried = <T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+const createUncurried = <T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   const store = actualCreate(stateCreator)
   const initialState = store.getInitialState()
   storeResetFns.add(() => {
@@ -203,20 +191,14 @@ const createUncurried = <T>(
 }
 
 // when creating a store, we get its initial state, create a reset function and add it in the set
-export const create = (<T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+export const create = (<T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   console.log('zustand create mock')
 
   // to support curried version of create
-  return typeof stateCreator === 'function'
-    ? createUncurried(stateCreator)
-    : createUncurried
+  return typeof stateCreator === 'function' ? createUncurried(stateCreator) : createUncurried
 }) as typeof ZustandExportedTypes.create
 
-const createStoreUncurried = <T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+const createStoreUncurried = <T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   const store = actualCreateStore(stateCreator)
   const initialState = store.getInitialState()
   storeResetFns.add(() => {
@@ -226,9 +208,7 @@ const createStoreUncurried = <T>(
 }
 
 // when creating a store, we get its initial state, create a reset function and add it in the set
-export const createStore = (<T>(
-  stateCreator: ZustandExportedTypes.StateCreator<T>,
-) => {
+export const createStore = (<T>(stateCreator: ZustandExportedTypes.StateCreator<T>) => {
   console.log('zustand createStore mock')
 
   // to support curried version of createStore
@@ -313,10 +293,7 @@ export const counterStoreCreator: StateCreator<CounterStore> = (set) => ({
 // stores/use-counter-store.ts
 import { create } from 'zustand'
 
-import {
-  type CounterStore,
-  counterStoreCreator,
-} from '../shared/counter-store-creator'
+import { type CounterStore, counterStoreCreator } from '../shared/counter-store-creator'
 
 export const useCounterStore = create<CounterStore>()(counterStoreCreator)
 ```
@@ -328,10 +305,7 @@ import { createStore } from 'zustand'
 import { useStoreWithEqualityFn } from 'zustand/traditional'
 import { shallow } from 'zustand/shallow'
 
-import {
-  type CounterStore,
-  counterStoreCreator,
-} from '../shared/counter-store-creator'
+import { type CounterStore, counterStoreCreator } from '../shared/counter-store-creator'
 
 export const createCounterStore = () => {
   return createStore<CounterStore>(counterStoreCreator)
@@ -339,36 +313,24 @@ export const createCounterStore = () => {
 
 export type CounterStoreApi = ReturnType<typeof createCounterStore>
 
-export const CounterStoreContext = createContext<CounterStoreApi | undefined>(
-  undefined,
-)
+export const CounterStoreContext = createContext<CounterStoreApi | undefined>(undefined)
 
 export interface CounterStoreProviderProps {
   children: ReactNode
 }
 
-export const CounterStoreProvider = ({
-  children,
-}: CounterStoreProviderProps) => {
+export const CounterStoreProvider = ({ children }: CounterStoreProviderProps) => {
   const [store] = useState(() => createCounterStore())
-  return (
-    <CounterStoreContext.Provider value={store}>
-      {children}
-    </CounterStoreContext.Provider>
-  )
+  return <CounterStoreContext.Provider value={store}>{children}</CounterStoreContext.Provider>
 }
 
 export type UseCounterStoreContextSelector<T> = (store: CounterStore) => T
 
-export const useCounterStoreContext = <T,>(
-  selector: UseCounterStoreContextSelector<T>,
-): T => {
+export const useCounterStoreContext = <T,>(selector: UseCounterStoreContextSelector<T>): T => {
   const counterStoreContext = useContext(CounterStoreContext)
 
   if (counterStoreContext === undefined) {
-    throw new Error(
-      'useCounterStoreContext must be used within CounterStoreProvider',
-    )
+    throw new Error('useCounterStoreContext must be used within CounterStoreProvider')
   }
 
   return useStoreWithEqualityFn(counterStoreContext, selector, shallow)
@@ -409,9 +371,7 @@ describe('Counter', () => {
     renderCounter()
 
     expect(await screen.findByText(/^1$/)).toBeInTheDocument()
-    expect(
-      await screen.findByRole('button', { name: /one up/i }),
-    ).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: /one up/i })).toBeInTheDocument()
   })
 
   test('should increase count by clicking a button', async () => {
@@ -477,9 +437,7 @@ describe('CounterWithContext', () => {
     renderCounterWithContext()
 
     expect(await screen.findByText(/^1$/)).toBeInTheDocument()
-    expect(
-      await screen.findByRole('button', { name: /one up/i }),
-    ).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: /one up/i })).toBeInTheDocument()
   })
 
   test('should increase count by clicking a button', async () => {
@@ -528,10 +486,7 @@ export const counterStoreCreator: StateCreator<CounterStore> = (set) => ({
 // stores/use-counter-store.ts
 import { create } from 'zustand'
 
-import {
-  type CounterStore,
-  counterStoreCreator,
-} from '../shared/counter-store-creator'
+import { type CounterStore, counterStoreCreator } from '../shared/counter-store-creator'
 
 export const useCounterStore = create<CounterStore>()(counterStoreCreator)
 ```
@@ -543,10 +498,7 @@ import { createStore } from 'zustand'
 import { useStoreWithEqualityFn } from 'zustand/traditional'
 import { shallow } from 'zustand/shallow'
 
-import {
-  type CounterStore,
-  counterStoreCreator,
-} from '../shared/counter-store-creator'
+import { type CounterStore, counterStoreCreator } from '../shared/counter-store-creator'
 
 export const createCounterStore = () => {
   return createStore<CounterStore>(counterStoreCreator)
@@ -554,36 +506,24 @@ export const createCounterStore = () => {
 
 export type CounterStoreApi = ReturnType<typeof createCounterStore>
 
-export const CounterStoreContext = createContext<CounterStoreApi | undefined>(
-  undefined,
-)
+export const CounterStoreContext = createContext<CounterStoreApi | undefined>(undefined)
 
 export interface CounterStoreProviderProps {
   children: ReactNode
 }
 
-export const CounterStoreProvider = ({
-  children,
-}: CounterStoreProviderProps) => {
+export const CounterStoreProvider = ({ children }: CounterStoreProviderProps) => {
   const [store] = useState(() => createCounterStore())
-  return (
-    <CounterStoreContext.Provider value={store}>
-      {children}
-    </CounterStoreContext.Provider>
-  )
+  return <CounterStoreContext.Provider value={store}>{children}</CounterStoreContext.Provider>
 }
 
 export type UseCounterStoreContextSelector<T> = (store: CounterStore) => T
 
-export const useCounterStoreContext = <T,>(
-  selector: UseCounterStoreContextSelector<T>,
-): T => {
+export const useCounterStoreContext = <T,>(selector: UseCounterStoreContextSelector<T>): T => {
   const counterStoreContext = useContext(CounterStoreContext)
 
   if (counterStoreContext === undefined) {
-    throw new Error(
-      'useCounterStoreContext must be used within CounterStoreProvider',
-    )
+    throw new Error('useCounterStoreContext must be used within CounterStoreProvider')
   }
 
   return useStoreWithEqualityFn(counterStoreContext, selector, shallow)
@@ -692,9 +632,7 @@ describe('CounterWithContext', () => {
     renderCounterWithContext(counterStore)
 
     expect(counterStore.getState().count).toBe(1)
-    expect(
-      await screen.findByRole('button', { name: /one up/i }),
-    ).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: /one up/i })).toBeInTheDocument()
   })
 
   test('should increase count by clicking a button', async () => {
@@ -714,9 +652,7 @@ describe('CounterWithContext', () => {
 const renderCounterWithContext = (store) => {
   return render(<CounterWithContext />, {
     wrapper: ({ children }) => (
-      <CounterStoreContext.Provider value={store}>
-        {children}
-      </CounterStoreContext.Provider>
+      <CounterStoreContext.Provider value={store}>{children}</CounterStoreContext.Provider>
     ),
   })
 }

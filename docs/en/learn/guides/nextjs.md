@@ -92,9 +92,7 @@ export const defaultInitState: CounterState = {
   count: 0,
 }
 
-export const createCounterStore = (
-  initState: CounterState = defaultInitState,
-) => {
+export const createCounterStore = (initState: CounterState = defaultInitState) => {
   return createStore<CounterStore>()((set) => ({
     ...initState,
     decrementCount: () => set((state) => ({ count: state.count - 1 })),
@@ -118,28 +116,18 @@ import { type CounterStore, createCounterStore } from '@/stores/counter-store'
 
 export type CounterStoreApi = ReturnType<typeof createCounterStore>
 
-export const CounterStoreContext = createContext<CounterStoreApi | undefined>(
-  undefined,
-)
+export const CounterStoreContext = createContext<CounterStoreApi | undefined>(undefined)
 
 export interface CounterStoreProviderProps {
   children: ReactNode
 }
 
-export const CounterStoreProvider = ({
-  children,
-}: CounterStoreProviderProps) => {
+export const CounterStoreProvider = ({ children }: CounterStoreProviderProps) => {
   const [store] = useState(() => createCounterStore())
-  return (
-    <CounterStoreContext.Provider value={store}>
-      {children}
-    </CounterStoreContext.Provider>
-  )
+  return <CounterStoreContext.Provider value={store}>{children}</CounterStoreContext.Provider>
 }
 
-export const useCounterStore = <T,>(
-  selector: (store: CounterStore) => T,
-): T => {
+export const useCounterStore = <T,>(selector: (store: CounterStore) => T): T => {
   const counterStoreContext = useContext(CounterStoreContext)
   if (!counterStoreContext) {
     throw new Error(`useCounterStore must be used within CounterStoreProvider`)
@@ -169,9 +157,7 @@ both architectures should be the same with slight differences related to each ar
 import { useCounterStore } from '@/providers/counter-store-provider'
 
 export const HomePage = () => {
-  const { count, incrementCount, decrementCount } = useCounterStore(
-    (state) => state,
-  )
+  const { count, incrementCount, decrementCount } = useCounterStore((state) => state)
 
   return (
     <div>
@@ -239,9 +225,7 @@ export default function Home() {
 import { useCounterStore } from '@/providers/counter-store-provider'
 
 export const HomePage = () => {
-  const { count, incrementCount, decrementCount } = useCounterStore(
-    (state) => state,
-  )
+  const { count, incrementCount, decrementCount } = useCounterStore((state) => state)
 
   return (
     <div>

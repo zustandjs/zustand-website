@@ -63,9 +63,7 @@ type AgeStoreState = { age: number }
 
 type AgeStoreActions = {
   setAge: (
-    nextAge:
-      | AgeStoreState['age']
-      | ((currentAge: AgeStoreState['age']) => AgeStoreState['age']),
+    nextAge: AgeStoreState['age'] | ((currentAge: AgeStoreState['age']) => AgeStoreState['age']),
   ) => void
 }
 
@@ -370,11 +368,9 @@ export default function MovingDot() {
   const setPosition = usePositionStore((state) => state.setPosition)
 
   useEffect(() => {
-    const unsubscribePositionStore = usePositionStore.subscribe(
-      ({ position }) => {
-        console.log('new position', { position })
-      },
-    )
+    const unsubscribePositionStore = usePositionStore.subscribe(({ position }) => {
+      console.log('new position', { position })
+    })
 
     return () => {
       unsubscribePositionStore()

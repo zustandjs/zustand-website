@@ -121,9 +121,7 @@ export const useBoundStore = create(
     {
       // ...
       partialize: (state) =>
-        Object.fromEntries(
-          Object.entries(state).filter(([key]) => !['foo'].includes(key)),
-        ),
+        Object.fromEntries(Object.entries(state).filter(([key]) => !['foo'].includes(key))),
     },
   ),
 )
@@ -278,8 +276,7 @@ export const useBoundStore = create(
     }),
     {
       // ...
-      merge: (persistedState, currentState) =>
-        deepMerge(currentState, persistedState),
+      merge: (persistedState, currentState) => deepMerge(currentState, persistedState),
     },
   ),
 )

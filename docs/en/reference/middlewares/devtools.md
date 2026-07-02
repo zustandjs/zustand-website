@@ -88,15 +88,9 @@ type JungleStore = {
 const useJungleStore = create<JungleStore>()(
   devtools((set) => ({
     bears: 0,
-    addBear: () =>
-      set((state) => ({ bears: state.bears + 1 }), undefined, 'jungle/addBear'),
+    addBear: () => set((state) => ({ bears: state.bears + 1 }), undefined, 'jungle/addBear'),
     fishes: 0,
-    addFish: () =>
-      set(
-        (state) => ({ fishes: state.fishes + 1 }),
-        undefined,
-        'jungle/addFish',
-      ),
+    addFish: () => set((state) => ({ fishes: state.fishes + 1 }), undefined, 'jungle/addFish'),
   })),
 )
 ```
@@ -121,34 +115,18 @@ type FishSlice = {
 
 type JungleStore = BearSlice & FishSlice
 
-const createBearSlice: StateCreator<
-  JungleStore,
-  [['zustand/devtools', never]],
-  [],
-  BearSlice
-> = (set) => ({
+const createBearSlice: StateCreator<JungleStore, [['zustand/devtools', never]], [], BearSlice> = (
+  set,
+) => ({
   bears: 0,
-  addBear: () =>
-    set(
-      (state) => ({ bears: state.bears + 1 }),
-      undefined,
-      'jungle:bear/addBear',
-    ),
+  addBear: () => set((state) => ({ bears: state.bears + 1 }), undefined, 'jungle:bear/addBear'),
 })
 
-const createFishSlice: StateCreator<
-  JungleStore,
-  [['zustand/devtools', never]],
-  [],
-  FishSlice
-> = (set) => ({
+const createFishSlice: StateCreator<JungleStore, [['zustand/devtools', never]], [], FishSlice> = (
+  set,
+) => ({
   fishes: 0,
-  addFish: () =>
-    set(
-      (state) => ({ fishes: state.fishes + 1 }),
-      undefined,
-      'jungle:fish/addFish',
-    ),
+  addFish: () => set((state) => ({ fishes: state.fishes + 1 }), undefined, 'jungle:fish/addFish'),
 })
 
 const useJungleStore = create<JungleStore>()(
@@ -182,8 +160,7 @@ const useStore = create<Store>()(
       token: null,
       login: (user, token) => set({ user, token }, undefined, 'auth/login'),
       logout: () => set({ user: null, token: null }, undefined, 'auth/logout'),
-      updateData: () =>
-        set({ user: 'updated' }, undefined, 'internal/updateData'),
+      updateData: () => set({ user: 'updated' }, undefined, 'internal/updateData'),
     }),
     {
       name: 'AuthStore',
@@ -265,23 +242,17 @@ type FishSlice = {
 
 type JungleStore = BearSlice & FishSlice
 
-const createBearSlice: StateCreator<
-  JungleStore,
-  [['zustand/devtools', never]],
-  [],
-  BearSlice
-> = (set) => ({
+const createBearSlice: StateCreator<JungleStore, [['zustand/devtools', never]], [], BearSlice> = (
+  set,
+) => ({
   bears: 0,
   addBear: () => set((state) => ({ bears: state.bears + 1 })),
   eatFish: () => set((state) => ({ fishes: state.fishes - 1 })),
 })
 
-const createFishSlice: StateCreator<
-  JungleStore,
-  [['zustand/devtools', never]],
-  [],
-  FishSlice
-> = (set) => ({
+const createFishSlice: StateCreator<JungleStore, [['zustand/devtools', never]], [], FishSlice> = (
+  set,
+) => ({
   fishes: 0,
   addFish: () => set((state) => ({ fishes: state.fishes + 1 })),
 })
@@ -316,26 +287,18 @@ type FishSlice = {
 
 type JungleStore = BearSlice & FishSlice
 
-const createBearSlice: StateCreator<
-  JungleStore,
-  [['zustand/devtools', never]],
-  [],
-  BearSlice
-> = (set) => ({
+const createBearSlice: StateCreator<JungleStore, [['zustand/devtools', never]], [], BearSlice> = (
+  set,
+) => ({
   bears: 0,
-  addBear: () =>
-    set((state) => ({ bears: state.bears + 1 }), undefined, 'bear/addBear'),
+  addBear: () => set((state) => ({ bears: state.bears + 1 }), undefined, 'bear/addBear'),
 })
 
-const createFishSlice: StateCreator<
-  JungleStore,
-  [['zustand/devtools', never]],
-  [],
-  FishSlice
-> = (set) => ({
+const createFishSlice: StateCreator<JungleStore, [['zustand/devtools', never]], [], FishSlice> = (
+  set,
+) => ({
   fishes: 0,
-  addFish: () =>
-    set((state) => ({ fishes: state.fishes + 1 }), undefined, 'fish/addFish'),
+  addFish: () => set((state) => ({ fishes: state.fishes + 1 }), undefined, 'fish/addFish'),
 })
 
 const useJungleStore = create<JungleStore>()(

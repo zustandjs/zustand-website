@@ -103,10 +103,7 @@ positionStore.subscribe((state) => state.position.x, logger)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"

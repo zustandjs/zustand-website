@@ -131,9 +131,7 @@ const meals = ['Salmon', 'Berries', 'Nuts']
 function CommonConsumer() {
   const bearMealsOrder = useBearContext(
     useShallow((s) =>
-      Array.from({ length: s.bears }).map((_, index) =>
-        meals.at(index % meals.length),
-      ),
+      Array.from({ length: s.bears }).map((_, index) => meals.at(index % meals.length)),
     ),
   )
   return (

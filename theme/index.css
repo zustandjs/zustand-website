@@ -11,7 +11,6 @@
   --rp-home-hero-secondary-color: #ff5e00;
 }
 
-
 :where(:root) {
   --rp-c-brand: #0095ff;
   --rp-c-brand-light: #33adff;

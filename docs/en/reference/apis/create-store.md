@@ -57,9 +57,7 @@ type AgeStoreState = { age: number }
 
 type AgeStoreActions = {
   setAge: (
-    nextAge:
-      | AgeStoreState['age']
-      | ((currentAge: AgeStoreState['age']) => AgeStoreState['age']),
+    nextAge: AgeStoreState['age'] | ((currentAge: AgeStoreState['age']) => AgeStoreState['age']),
   ) => void
 }
 
@@ -77,15 +75,9 @@ function increment() {
   ageStore.getState().setAge((currentAge) => currentAge + 1)
 }
 
-const $yourAgeHeading = document.getElementById(
-  'your-age',
-) as HTMLHeadingElement
-const $incrementBy3Button = document.getElementById(
-  'increment-by-3',
-) as HTMLButtonElement
-const $incrementBy1Button = document.getElementById(
-  'increment-by-1',
-) as HTMLButtonElement
+const $yourAgeHeading = document.getElementById('your-age') as HTMLHeadingElement
+const $incrementBy3Button = document.getElementById('increment-by-3') as HTMLButtonElement
+const $incrementBy1Button = document.getElementById('increment-by-1') as HTMLButtonElement
 
 $incrementBy3Button.addEventListener('click', () => {
   increment()
@@ -150,10 +142,7 @@ xStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -210,10 +199,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -263,10 +249,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -326,10 +309,7 @@ positionStore.subscribe(logger)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -370,9 +350,7 @@ const personStore = createStore<PersonStore>()((set) => ({
   setPerson: (person) => set({ person }),
 }))
 
-const $firstNameInput = document.getElementById(
-  'first-name',
-) as HTMLInputElement
+const $firstNameInput = document.getElementById('first-name') as HTMLInputElement
 const $lastNameInput = document.getElementById('last-name') as HTMLInputElement
 const $emailInput = document.getElementById('email') as HTMLInputElement
 const $result = document.getElementById('result') as HTMLDivElement
@@ -471,9 +449,7 @@ const personStore = createStore<PersonStore>()((set) => ({
   setPerson: (person) => set({ person }),
 }))
 
-const $firstNameInput = document.getElementById(
-  'first-name',
-) as HTMLInputElement
+const $firstNameInput = document.getElementById('first-name') as HTMLInputElement
 const $lastNameInput = document.getElementById('last-name') as HTMLInputElement
 const $emailInput = document.getElementById('email') as HTMLInputElement
 const $result = document.getElementById('result') as HTMLDivElement

@@ -80,16 +80,8 @@ will use the store to track and update the dot's position.
 
 ```tsx
 function MovingDot() {
-  const position = useStoreWithEqualityFn(
-    positionStore,
-    (state) => state.position,
-    shallow,
-  )
-  const setPosition = useStoreWithEqualityFn(
-    positionStore,
-    (state) => state.setPosition,
-    shallow,
-  )
+  const position = useStoreWithEqualityFn(positionStore, (state) => state.position, shallow)
+  const setPosition = useStoreWithEqualityFn(positionStore, (state) => state.setPosition, shallow)
 
   return (
     <div
@@ -151,16 +143,8 @@ const positionStore = createStore<PositionStore>()((set) => ({
 }))
 
 function MovingDot() {
-  const position = useStoreWithEqualityFn(
-    positionStore,
-    (state) => state.position,
-    shallow,
-  )
-  const setPosition = useStoreWithEqualityFn(
-    positionStore,
-    (state) => state.setPosition,
-    shallow,
-  )
+  const position = useStoreWithEqualityFn(positionStore, (state) => state.position, shallow)
+  const setPosition = useStoreWithEqualityFn(positionStore, (state) => state.setPosition, shallow)
 
   return (
     <div
@@ -227,14 +211,9 @@ Next, we'll create a factory function that manages the creation and retrieval of
 This allows each tab to have its own independent counter.
 
 ```ts
-const defaultCounterStores = new Map<
-  string,
-  ReturnType<typeof createCounterStore>
->()
+const defaultCounterStores = new Map<string, ReturnType<typeof createCounterStore>>()
 
-const createCounterStoreFactory = (
-  counterStores: typeof defaultCounterStores,
-) => {
+const createCounterStoreFactory = (counterStores: typeof defaultCounterStores) => {
   return (counterStoreKey: string) => {
     if (!counterStores.has(counterStoreKey)) {
       counterStores.set(counterStoreKey, createCounterStore())
@@ -243,8 +222,7 @@ const createCounterStoreFactory = (
   }
 }
 
-const getOrCreateCounterStoreByKey =
-  createCounterStoreFactory(defaultCounterStores)
+const getOrCreateCounterStoreByKey = createCounterStoreFactory(defaultCounterStores)
 ```
 
 Now, let’s build the Tabs component, where users can switch between tabs and increment each tab’s
@@ -347,14 +325,9 @@ const createCounterStore = () => {
   }))
 }
 
-const defaultCounterStores = new Map<
-  string,
-  ReturnType<typeof createCounterStore>
->()
+const defaultCounterStores = new Map<string, ReturnType<typeof createCounterStore>>()
 
-const createCounterStoreFactory = (
-  counterStores: typeof defaultCounterStores,
-) => {
+const createCounterStoreFactory = (counterStores: typeof defaultCounterStores) => {
   return (counterStoreKey: string) => {
     if (!counterStores.has(counterStoreKey)) {
       counterStores.set(counterStoreKey, createCounterStore())
@@ -363,8 +336,7 @@ const createCounterStoreFactory = (
   }
 }
 
-const getOrCreateCounterStoreByKey =
-  createCounterStoreFactory(defaultCounterStores)
+const getOrCreateCounterStoreByKey = createCounterStoreFactory(defaultCounterStores)
 
 export default function App() {
   const [currentTabIndex, setCurrentTabIndex] = useState(0)
@@ -456,17 +428,11 @@ Next, we'll create a context and a provider component to pass down the store thr
 component tree. This allows each `MovingDot` component to have its own independent state.
 
 ```tsx
-const PositionStoreContext = createContext<ReturnType<
-  typeof createPositionStore
-> | null>(null)
+const PositionStoreContext = createContext<ReturnType<typeof createPositionStore> | null>(null)
 
 function PositionStoreProvider({ children }: { children: ReactNode }) {
   const [store] = useState(() => createPositionStore())
-  return (
-    <PositionStoreContext.Provider value={store}>
-      {children}
-    </PositionStoreContext.Provider>
-  )
+  return <PositionStoreContext.Provider value={store}>{children}</PositionStoreContext.Provider>
 }
 ```
 
@@ -478,9 +444,7 @@ function usePositionStore<U>(selector: (state: PositionStore) => U) {
   const store = useContext(PositionStoreContext)
 
   if (store === null) {
-    throw new Error(
-      'usePositionStore must be used within PositionStoreProvider',
-    )
+    throw new Error('usePositionStore must be used within PositionStoreProvider')
   }
 
   return useStoreWithEqualityFn(store, selector, shallow)
@@ -570,26 +534,18 @@ const createPositionStore = () => {
   }))
 }
 
-const PositionStoreContext = createContext<ReturnType<
-  typeof createPositionStore
-> | null>(null)
+const PositionStoreContext = createContext<ReturnType<typeof createPositionStore> | null>(null)
 
 function PositionStoreProvider({ children }: { children: ReactNode }) {
   const [store] = useState(() => createPositionStore())
-  return (
-    <PositionStoreContext.Provider value={store}>
-      {children}
-    </PositionStoreContext.Provider>
-  )
+  return <PositionStoreContext.Provider value={store}>{children}</PositionStoreContext.Provider>
 }
 
 function usePositionStore<U>(selector: (state: PositionStore) => U) {
   const store = useContext(PositionStoreContext)
 
   if (store === null) {
-    throw new Error(
-      'usePositionStore must be used within PositionStoreProvider',
-    )
+    throw new Error('usePositionStore must be used within PositionStoreProvider')
   }
 
   return useStoreWithEqualityFn(store, selector, shallow)
@@ -693,15 +649,9 @@ for this.
 const CounterStoresContext = createContext(null)
 
 const CounterStoresProvider = ({ children }) => {
-  const [stores] = useState(
-    () => new Map<string, ReturnType<typeof createCounterStore>>(),
-  )
+  const [stores] = useState(() => new Map<string, ReturnType<typeof createCounterStore>>())
 
-  return (
-    <CounterStoresContext.Provider value={stores}>
-      {children}
-    </CounterStoresContext.Provider>
-  )
+  return <CounterStoresContext.Provider value={stores}>{children}</CounterStoresContext.Provider>
 }
 ```
 
@@ -709,10 +659,7 @@ Now, we’ll create a custom hook, `useCounterStore`, that lets us access the co
 given tab.
 
 ```tsx
-const useCounterStore = <U,>(
-  key: string,
-  selector: (state: CounterStore) => U,
-) => {
+const useCounterStore = <U,>(key: string, selector: (state: CounterStore) => U) => {
   const stores = useContext(CounterStoresContext)
 
   if (stores === undefined) {
@@ -734,10 +681,7 @@ counter.
 ```tsx
 function Tabs() {
   const [currentTabIndex, setCurrentTabIndex] = useState(0)
-  const counterState = useCounterStore(
-    `tab-${currentTabIndex}`,
-    (state) => state,
-  )
+  const counterState = useCounterStore(`tab-${currentTabIndex}`, (state) => state)
 
   return (
     <div style={{ fontFamily: 'monospace' }}>
@@ -811,13 +755,7 @@ export default function App() {
 Here is what the code should look like:
 
 ```tsx
-import {
-  type ReactNode,
-  useState,
-  useCallback,
-  useContext,
-  createContext,
-} from 'react'
+import { type ReactNode, useState, useCallback, useContext, createContext } from 'react'
 import { createStore, useStore } from 'zustand'
 
 type CounterState = {
@@ -854,21 +792,12 @@ const CounterStoresContext = createContext<Map<
 > | null>(null)
 
 const CounterStoresProvider = ({ children }: { children: ReactNode }) => {
-  const [stores] = useState(
-    () => new Map<string, ReturnType<typeof createCounterStore>>(),
-  )
+  const [stores] = useState(() => new Map<string, ReturnType<typeof createCounterStore>>())
 
-  return (
-    <CounterStoresContext.Provider value={stores}>
-      {children}
-    </CounterStoresContext.Provider>
-  )
+  return <CounterStoresContext.Provider value={stores}>{children}</CounterStoresContext.Provider>
 }
 
-const useCounterStore = <U,>(
-  key: string,
-  selector: (state: CounterStore) => U,
-) => {
+const useCounterStore = <U,>(key: string, selector: (state: CounterStore) => U) => {
   const stores = useContext(CounterStoresContext)
 
   if (stores === undefined) {
@@ -885,10 +814,7 @@ const useCounterStore = <U,>(
 
 function Tabs() {
   const [currentTabIndex, setCurrentTabIndex] = useState(0)
-  const counterState = useCounterStore(
-    `tab-${currentTabIndex}`,
-    (state) => state,
-  )
+  const counterState = useCounterStore(`tab-${currentTabIndex}`, (state) => state)
 
   return (
     <div style={{ fontFamily: 'monospace' }}>

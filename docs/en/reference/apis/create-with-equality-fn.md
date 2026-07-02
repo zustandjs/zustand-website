@@ -72,9 +72,7 @@ type AgeStoreState = { age: number }
 
 type AgeStoreActions = {
   setAge: (
-    nextAge:
-      | AgeStoreState['age']
-      | ((currentAge: AgeStoreState['age']) => AgeStoreState['age']),
+    nextAge: AgeStoreState['age'] | ((currentAge: AgeStoreState['age']) => AgeStoreState['age']),
   ) => void
 }
 
@@ -266,10 +264,7 @@ import { shallow } from 'zustand/vanilla/shallow'
 
 type PositionStore = [number, number]
 
-const usePositionStore = createWithEqualityFn<PositionStore>()(
-  () => [0, 0],
-  shallow,
-)
+const usePositionStore = createWithEqualityFn<PositionStore>()(() => [0, 0], shallow)
 
 export default function MovingDot() {
   const [x, y] = usePositionStore()
@@ -397,11 +392,9 @@ export default function MovingDot() {
   const setPosition = usePositionStore((state) => state.setPosition)
 
   useEffect(() => {
-    const unsubscribePositionStore = usePositionStore.subscribe(
-      ({ position }) => {
-        console.log('new position', { position })
-      },
-    )
+    const unsubscribePositionStore = usePositionStore.subscribe(({ position }) => {
+      console.log('new position', { position })
+    })
 
     return () => {
       unsubscribePositionStore()

@@ -43,10 +43,7 @@ const useGameStore = create(
       return {
         setHistory: (nextHistory) => {
           set((state) => ({
-            history:
-              typeof nextHistory === 'function'
-                ? nextHistory(state.history)
-                : nextHistory,
+            history: typeof nextHistory === 'function' ? nextHistory(state.history) : nextHistory,
           }))
         },
         setCurrentMove: (nextCurrentMove) => {
@@ -111,11 +108,7 @@ function Board({ xIsNext, squares, onPlay }) {
         }}
       >
         {squares.map((_, i) => (
-          <Square
-            key={`square-${i}`}
-            value={squares[i]}
-            onSquareClick={() => handleClick(i)}
-          />
+          <Square key={`square-${i}`} value={squares[i]} onSquareClick={() => handleClick(i)} />
         ))}
       </div>
     </>
@@ -155,15 +148,11 @@ export default function Game() {
         <ol>
           {history.map((_, historyIndex) => {
             const description =
-              historyIndex > 0
-                ? `Go to move #${historyIndex}`
-                : 'Go to game start'
+              historyIndex > 0 ? `Go to move #${historyIndex}` : 'Go to game start'
 
             return (
               <li key={historyIndex}>
-                <button onClick={() => jumpTo(historyIndex)}>
-                  {description}
-                </button>
+                <button onClick={() => jumpTo(historyIndex)}>{description}</button>
               </li>
             )
           })}
@@ -319,10 +308,7 @@ const useGameStore = create(
     return {
       setSquares: (nextSquares) => {
         set((state) => ({
-          squares:
-            typeof nextSquares === 'function'
-              ? nextSquares(state.squares)
-              : nextSquares,
+          squares: typeof nextSquares === 'function' ? nextSquares(state.squares) : nextSquares,
         }))
       },
     }
@@ -412,11 +398,7 @@ export default function Board() {
       }}
     >
       {squares.map((square, squareIndex) => (
-        <Square
-          key={squareIndex}
-          value={square}
-          onSquareClick={() => handleClick(squareIndex)}
-        />
+        <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
       ))}
     </div>
   )
@@ -441,18 +423,12 @@ const useGameStore = create(
     return {
       setSquares: (nextSquares) => {
         set((state) => ({
-          squares:
-            typeof nextSquares === 'function'
-              ? nextSquares(state.squares)
-              : nextSquares,
+          squares: typeof nextSquares === 'function' ? nextSquares(state.squares) : nextSquares,
         }))
       },
       setXIsNext: (nextXIsNext) => {
         set((state) => ({
-          xIsNext:
-            typeof nextXIsNext === 'function'
-              ? nextXIsNext(state.xIsNext)
-              : nextXIsNext,
+          xIsNext: typeof nextXIsNext === 'function' ? nextXIsNext(state.xIsNext) : nextXIsNext,
         }))
       },
     }
@@ -492,11 +468,7 @@ export default function Board() {
       }}
     >
       {squares.map((square, squareIndex) => (
-        <Square
-          key={squareIndex}
-          value={square}
-          onSquareClick={() => handleClick(squareIndex)}
-        />
+        <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
       ))}
     </div>
   )
@@ -600,11 +572,7 @@ export default function Board() {
         }}
       >
         {squares.map((square, squareIndex) => (
-          <Square
-            key={squareIndex}
-            value={square}
-            onSquareClick={() => handleClick(squareIndex)}
-          />
+          <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
         ))}
       </div>
     </>
@@ -624,18 +592,12 @@ const useGameStore = create(
     return {
       setSquares: (nextSquares) => {
         set((state) => ({
-          squares:
-            typeof nextSquares === 'function'
-              ? nextSquares(state.squares)
-              : nextSquares,
+          squares: typeof nextSquares === 'function' ? nextSquares(state.squares) : nextSquares,
         }))
       },
       setXIsNext: (nextXIsNext) => {
         set((state) => ({
-          xIsNext:
-            typeof nextXIsNext === 'function'
-              ? nextXIsNext(state.xIsNext)
-              : nextXIsNext,
+          xIsNext: typeof nextXIsNext === 'function' ? nextXIsNext(state.xIsNext) : nextXIsNext,
         }))
       },
     }
@@ -696,11 +658,7 @@ export default function Board() {
         }}
       >
         {squares.map((square, squareIndex) => (
-          <Square
-            key={squareIndex}
-            value={square}
-            onSquareClick={() => handleClick(squareIndex)}
-          />
+          <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
         ))}
       </div>
     </>
@@ -815,11 +773,7 @@ function Board() {
         }}
       >
         {squares.map((square, squareIndex) => (
-          <Square
-            key={squareIndex}
-            value={square}
-            onSquareClick={() => handleClick(squareIndex)}
-          />
+          <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
         ))}
       </div>
     </>
@@ -854,18 +808,12 @@ const useGameStore = create(
     return {
       setHistory: (nextHistory) => {
         set((state) => ({
-          history:
-            typeof nextHistory === 'function'
-              ? nextHistory(state.history)
-              : nextHistory,
+          history: typeof nextHistory === 'function' ? nextHistory(state.history) : nextHistory,
         }))
       },
       setXIsNext: (nextXIsNext) => {
         set((state) => ({
-          xIsNext:
-            typeof nextXIsNext === 'function'
-              ? nextXIsNext(state.xIsNext)
-              : nextXIsNext,
+          xIsNext: typeof nextXIsNext === 'function' ? nextXIsNext(state.xIsNext) : nextXIsNext,
         }))
       },
     }
@@ -974,11 +922,7 @@ function Board({ xIsNext, squares, onPlay }) {
         }}
       >
         {squares.map((square, squareIndex) => (
-          <Square
-            key={squareIndex}
-            value={square}
-            onSquareClick={() => handleClick(squareIndex)}
-          />
+          <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
         ))}
       </div>
     </>
@@ -1018,18 +962,12 @@ const useGameStore = create(
     return {
       setHistory: (nextHistory) => {
         set((state) => ({
-          history:
-            typeof nextHistory === 'function'
-              ? nextHistory(state.history)
-              : nextHistory,
+          history: typeof nextHistory === 'function' ? nextHistory(state.history) : nextHistory,
         }))
       },
       setXIsNext: (nextXIsNext) => {
         set((state) => ({
-          xIsNext:
-            typeof nextXIsNext === 'function'
-              ? nextXIsNext(state.xIsNext)
-              : nextXIsNext,
+          xIsNext: typeof nextXIsNext === 'function' ? nextXIsNext(state.xIsNext) : nextXIsNext,
         }))
       },
     }
@@ -1085,11 +1023,7 @@ function Board({ xIsNext, squares, onPlay }) {
         }}
       >
         {squares.map((square, squareIndex) => (
-          <Square
-            key={squareIndex}
-            value={square}
-            onSquareClick={() => handleClick(squareIndex)}
-          />
+          <Square key={squareIndex} value={square} onSquareClick={() => handleClick(squareIndex)} />
         ))}
       </div>
     </>
@@ -1204,15 +1138,11 @@ export default function Game() {
         <ol>
           {history.map((_, historyIndex) => {
             const description =
-              historyIndex > 0
-                ? `Go to move #${historyIndex}`
-                : 'Go to game start'
+              historyIndex > 0 ? `Go to move #${historyIndex}` : 'Go to game start'
 
             return (
               <li key={historyIndex}>
-                <button onClick={() => jumpTo(historyIndex)}>
-                  {description}
-                </button>
+                <button onClick={() => jumpTo(historyIndex)}>{description}</button>
               </li>
             )
           })}
@@ -1229,37 +1159,28 @@ which will start at `0`:
 
 ```js {3,14-21}
 const useGameStore = create(
-  combine(
-    { history: [Array(9).fill(null)], currentMove: 0, xIsNext: true },
-    (set) => {
-      return {
-        setHistory: (nextHistory) => {
-          set((state) => ({
-            history:
-              typeof nextHistory === 'function'
-                ? nextHistory(state.history)
-                : nextHistory,
-          }))
-        },
-        setCurrentMove: (nextCurrentMove) => {
-          set((state) => ({
-            currentMove:
-              typeof nextCurrentMove === 'function'
-                ? nextCurrentMove(state.currentMove)
-                : nextCurrentMove,
-          }))
-        },
-        setXIsNext: (nextXIsNext) => {
-          set((state) => ({
-            xIsNext:
-              typeof nextXIsNext === 'function'
-                ? nextXIsNext(state.xIsNext)
-                : nextXIsNext,
-          }))
-        },
-      }
-    },
-  ),
+  combine({ history: [Array(9).fill(null)], currentMove: 0, xIsNext: true }, (set) => {
+    return {
+      setHistory: (nextHistory) => {
+        set((state) => ({
+          history: typeof nextHistory === 'function' ? nextHistory(state.history) : nextHistory,
+        }))
+      },
+      setCurrentMove: (nextCurrentMove) => {
+        set((state) => ({
+          currentMove:
+            typeof nextCurrentMove === 'function'
+              ? nextCurrentMove(state.currentMove)
+              : nextCurrentMove,
+        }))
+      },
+      setXIsNext: (nextXIsNext) => {
+        set((state) => ({
+          xIsNext: typeof nextXIsNext === 'function' ? nextXIsNext(state.xIsNext) : nextXIsNext,
+        }))
+      },
+    }
+  }),
 )
 ```
 
@@ -1331,15 +1252,11 @@ export default function Game() {
         <ol>
           {history.map((_, historyIndex) => {
             const description =
-              historyIndex > 0
-                ? `Go to move #${historyIndex}`
-                : 'Go to game start'
+              historyIndex > 0 ? `Go to move #${historyIndex}` : 'Go to game start'
 
             return (
               <li key={historyIndex}>
-                <button onClick={() => jumpTo(historyIndex)}>
-                  {description}
-                </button>
+                <button onClick={() => jumpTo(historyIndex)}>{description}</button>
               </li>
             )
           })}
@@ -1394,15 +1311,11 @@ export default function Game() {
         <ol>
           {history.map((_, historyIndex) => {
             const description =
-              historyIndex > 0
-                ? `Go to move #${historyIndex}`
-                : 'Go to game start'
+              historyIndex > 0 ? `Go to move #${historyIndex}` : 'Go to game start'
 
             return (
               <li key={historyIndex}>
-                <button onClick={() => jumpTo(historyIndex)}>
-                  {description}
-                </button>
+                <button onClick={() => jumpTo(historyIndex)}>{description}</button>
               </li>
             )
           })}

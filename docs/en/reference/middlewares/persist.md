@@ -175,10 +175,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -209,9 +206,7 @@ type PositionStoreState = {
 
 type PositionStoreActions = {
   actions: {
-    setPosition: (
-      nextPosition: PositionStoreState['context']['position'],
-    ) => void
+    setPosition: (nextPosition: PositionStoreState['context']['position']) => void
   }
 }
 
@@ -277,9 +272,7 @@ type PositionStoreState = {
 
 type PositionStoreActions = {
   actions: {
-    setPosition: (
-      nextPosition: PositionStoreState['context']['position'],
-    ) => void
+    setPosition: (nextPosition: PositionStoreState['context']['position']) => void
   }
 }
 
@@ -324,10 +317,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -351,11 +341,7 @@ const getSearchParams = () => {
 }
 
 const updateSearchParams = (searchParams: URLSearchParams) => {
-  window.history.replaceState(
-    {},
-    '',
-    `${location.pathname}?${searchParams.toString()}`,
-  )
+  window.history.replaceState({}, '', `${location.pathname}?${searchParams.toString()}`)
 }
 
 const getSearchParam = (key: string) => {
@@ -467,11 +453,7 @@ const getSearchParams = () => {
 }
 
 const updateSearchParams = (searchParams: URLSearchParams) => {
-  window.history.replaceState(
-    {},
-    '',
-    `${location.pathname}?${searchParams.toString()}`,
-  )
+  window.history.replaceState({}, '', `${location.pathname}?${searchParams.toString()}`)
 }
 
 const getSearchParam = (key: string) => {
@@ -534,10 +516,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -680,10 +659,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -834,10 +810,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"
@@ -970,10 +943,7 @@ positionStore.subscribe(render)
 Here's the `html` code
 
 ```html
-<div
-  id="dot-container"
-  style="position: relative; width: 100vw; height: 100vh;"
->
+<div id="dot-container" style="position: relative; width: 100vw; height: 100vh;">
   <div
     id="dot"
     style="position: absolute; background-color: red; border-radius: 50%; left: -10px; top: -10px; width: 20px; height: 20px;"

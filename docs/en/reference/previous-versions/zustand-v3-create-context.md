@@ -123,11 +123,7 @@ const StoreProvider = ({ children }) => {
       // ...
     }))
   }
-  return (
-    <StoreContext.Provider value={storeRef.current}>
-      {children}
-    </StoreContext.Provider>
-  )
+  return <StoreContext.Provider value={storeRef.current}>{children}</StoreContext.Provider>
 }
 
 const useStoreInContext = (selector) => {

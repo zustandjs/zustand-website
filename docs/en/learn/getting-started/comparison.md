@@ -217,8 +217,7 @@ const countSlice = createSlice({
 
 const countStore = configureStore({ reducer: countSlice.reducer })
 
-const useAppSelector: TypedUseSelectorHook<typeof countStore.getState> =
-  useSelector
+const useAppSelector: TypedUseSelectorHook<typeof countStore.getState> = useSelector
 
 const useAppDispatch: () => typeof countStore.dispatch = useDispatch
 
@@ -321,15 +320,12 @@ type State = {
 }
 
 type Actions = {
-  updateCount: (
-    countCallback: (count: State['count']) => State['count'],
-  ) => void
+  updateCount: (countCallback: (count: State['count']) => State['count']) => void
 }
 
 const useCountStore = create<State & Actions>((set) => ({
   count: 0,
-  updateCount: (countCallback) =>
-    set((state) => ({ count: countCallback(state.count) })),
+  updateCount: (countCallback) => set((state) => ({ count: countCallback(state.count) })),
 }))
 ```
 
@@ -357,15 +353,12 @@ type State = {
 }
 
 type Actions = {
-  updateCount: (
-    countCallback: (count: State['count']) => State['count'],
-  ) => void
+  updateCount: (countCallback: (count: State['count']) => State['count']) => void
 }
 
 const useCountStore = create<State & Actions>((set) => ({
   count: 0,
-  updateCount: (countCallback) =>
-    set((state) => ({ count: countCallback(state.count) })),
+  updateCount: (countCallback) => set((state) => ({ count: countCallback(state.count) })),
 }))
 
 const Component = () => {
@@ -413,8 +406,7 @@ type Actions = {
 
 const useCountStore = create<State & Actions>((set) => ({
   count: 0,
-  setCount: (countCallback) =>
-    set((state) => ({ count: countCallback(state.count) })),
+  setCount: (countCallback) => set((state) => ({ count: countCallback(state.count) })),
 }))
 ```
 
@@ -451,8 +443,7 @@ type Actions = {
 
 const useCountStore = create<State & Actions>((set) => ({
   count: 0,
-  setCount: (countCallback) =>
-    set((state) => ({ count: countCallback(state.count) })),
+  setCount: (countCallback) => set((state) => ({ count: countCallback(state.count) })),
 }))
 
 const Component = () => {

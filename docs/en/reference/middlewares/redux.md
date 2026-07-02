@@ -72,10 +72,7 @@ type PersonStore = PersonStoreState & {
   dispatch: (action: PersonStoreAction) => PersonStoreAction
 }
 
-const personStoreReducer = (
-  state: PersonStoreState,
-  action: PersonStoreAction,
-) => {
+const personStoreReducer = (state: PersonStoreState, action: PersonStoreAction) => {
   switch (action.type) {
     case 'person/setFirstName': {
       return { ...state, firstName: action.firstName }
@@ -98,13 +95,9 @@ const personStoreInitialState: PersonStoreState = {
   email: 'bhepworth@sculpture.com',
 }
 
-const personStore = createStore<PersonStore>()(
-  redux(personStoreReducer, personStoreInitialState),
-)
+const personStore = createStore<PersonStore>()(redux(personStoreReducer, personStoreInitialState))
 
-const $firstNameInput = document.getElementById(
-  'first-name',
-) as HTMLInputElement
+const $firstNameInput = document.getElementById('first-name') as HTMLInputElement
 const $lastNameInput = document.getElementById('last-name') as HTMLInputElement
 const $emailInput = document.getElementById('email') as HTMLInputElement
 const $result = document.getElementById('result') as HTMLDivElement

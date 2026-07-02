@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+    "fmt": "oxfmt --check",
+    "fmt:fix": "oxfmt",
     "build": "rspress build",
     "dev": "rspress dev",
     "preview": "rspress preview"

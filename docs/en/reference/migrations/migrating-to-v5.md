@@ -99,10 +99,7 @@ For example, this may cause infinite loops.
 
 ```js
 // v4
-const [searchValue, setSearchValue] = useStore((state) => [
-  state.searchValue,
-  state.setSearchValue,
-])
+const [searchValue, setSearchValue] = useStore((state) => [state.searchValue, state.setSearchValue])
 ```
 
 The error message will be something like this:
@@ -184,9 +181,7 @@ If the value of the `replace` flag is dynamic and determined at runtime, you mig
 
 ```ts
 const replaceFlag = Math.random() > 0.5
-const args = [{ bears: 5 }, replaceFlag] as Parameters<
-  typeof useBearStore.setState
->
+const args = [{ bears: 5 }, replaceFlag] as Parameters<typeof useBearStore.setState>
 store.setState(...args)
 ```
 

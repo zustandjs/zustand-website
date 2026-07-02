@@ -189,9 +189,7 @@ the state change:
 
 ```tsx
 function BearNames() {
-  const names = useBearFamilyMealsStore(
-    useShallow((state) => Object.keys(state)),
-  )
+  const names = useBearFamilyMealsStore(useShallow((state) => Object.keys(state)))
 
   return <div>{names.join(', ')}</div>
 }
@@ -244,9 +242,7 @@ function UpdateBabyBearMeal() {
 }
 
 function BearNames() {
-  const names = useBearFamilyMealsStore(
-    useShallow((state) => Object.keys(state)),
-  )
+  const names = useBearFamilyMealsStore(useShallow((state) => Object.keys(state)))
 
   return <div>{names.join(', ')}</div>
 }
