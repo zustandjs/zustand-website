@@ -38,7 +38,7 @@ jobs:
         run: pnpm install
       - name: Build with Rspress
         run: |
-          pnpm run build
+          pnpm run build --base "/${{ github.event.repository.name }}"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
