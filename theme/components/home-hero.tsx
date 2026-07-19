@@ -1,4 +1,13 @@
+import { CodeGroup } from './code-group'
 import { Wrapper } from './wrapper'
+
+const installTabs = [
+  { label: 'npm', code: 'npm create vite@latest', prefix: '$ ' },
+  { label: 'Yarn', code: 'yarn create vite', prefix: '$ ' },
+  { label: 'pnpm', code: 'pnpm create vite', prefix: '$ ' },
+  { label: 'Bun', code: 'bun create vite', prefix: '$ ' },
+  { label: 'Deno', code: 'deno init --npm vite', prefix: '$ ' },
+]
 
 export function HomeHero() {
   return (
@@ -29,15 +38,7 @@ export function HomeHero() {
             </a>
           </div>
         </div>
-        {/* <CodeGroup
-        :tabs="installTabs"
-        className="hidden md:block w-full -mb-[16px]"
-        style="
-          --vp-code-tab-bg: var(--color-slate);
-          --vp-code-block-bg: var(--color-slate);
-          --vp-code-tab-divider: #000;
-        "
-      /> */}
+        <CodeGroup tabs={installTabs} className="hidden md:block w-full -mb-[16px]" />
       </div>
       <div className="flex flex-col sm:min-h-[30rem]">
         <div className="relative px-10 pb-10 md:pt-10 h-full flex flex-col justify-center overflow-clip">
