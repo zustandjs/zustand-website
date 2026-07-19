@@ -27,7 +27,7 @@
 }
 
 :where(html.rp-dark) {
-  --rp-c-bg: #111111;
+  --rp-c-bg: var(--color-primary);
   --rp-home-background-bg: var(--rp-c-bg);
   --rp-home-hero-title-bg: var(--rp-c-brand-dark);
 }

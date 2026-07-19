@@ -8,5 +8,20 @@
     "text": "Reference",
     "link": "/reference",
     "activeMatch": "/reference/"
+  },
+  {
+    "text": "v5.0.14",
+    "collapsible": true,
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Release Notes",
+        "link": "https://github.com/pmndrs/zustand/releases"
+      },
+      {
+        "text": "Contributing",
+        "link": "https://github.com/pmndrs/zustand/blob/main/CONTRIBUTING.md"
+      }
+    ]
   }
 ]

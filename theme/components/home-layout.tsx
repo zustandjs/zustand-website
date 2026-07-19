@@ -1,0 +1,158 @@
+import { Community } from './community'
+import { Footer } from './footer'
+import { HomeHero } from './home-hero'
+import { Spacer } from './spacer'
+import { Sponsors } from './sponsors'
+import { Wrapper } from './wrapper'
+import { Heading } from './heading'
+import { FeatureGridAlternative } from './feature-grid-alternative'
+import { FeatureGrid } from './feature-grid'
+import TrustedBy from './trusted-by'
+
+export function HomeLayout() {
+  return (
+    <div>
+      <Wrapper className="border-b">GG</Wrapper>
+      <HomeHero />
+      <TrustedBy logos={['openai', 'shopify', 'stripe', 'linear', 'clickup', 'wiz']} />
+      <Heading
+        heading="Redefining developer experience"
+        subheading="Vite makes web development enjoyable again"
+      />
+      <FeatureGrid />
+      <Heading heading="A shared foundation to build upon" />
+      <FeatureGridAlternative />
+      <Heading heading="Powering your favorite frameworks and tools" />
+      <Community />
+      <Sponsors
+        sponsors={[
+          {
+            tier: 'In partnership with',
+            size: 'big',
+            items: [
+              {
+                name: 'Bolt',
+                url: 'https://bolt.new',
+                img: 'https://sponsors.vite.dev/images/bolt.svg',
+              },
+              {
+                name: 'NuxtLabs',
+                url: 'https://nuxtlabs.com',
+                img: 'https://sponsors.vite.dev/images/nuxtlabs.svg',
+              },
+            ],
+          },
+          {
+            tier: 'Platinum Sponsors',
+            size: 'big',
+            items: [
+              {
+                name: 'Storyblok',
+                url: 'https://www.storyblok.com',
+                img: 'https://sponsors.vite.dev/images/storyblok.png',
+              },
+              {
+                name: 'CodeRabbit',
+                url: 'https://www.coderabbit.ai?utm_source=github&utm_medium=sponsors&utm_campaign=evan_you_2025',
+                img: 'https://sponsors.vite.dev/images/coderabbit.png',
+              },
+              {
+                name: 'Greptile',
+                url: 'https://www.greptile.com/?utm_source=vite&utm_medium=sponsorship&utm_campaign=vite_sponsor_page',
+                img: 'https://sponsors.vite.dev/images/greptile.png',
+              },
+              {
+                name: 'Railway',
+                url: 'https://railway.com/?utm_medium=sponsor&utm_source=oss&utm_campaign=vite',
+                img: 'https://sponsors.vite.dev/images/railway.svg',
+              },
+              {
+                name: 'SerpApi',
+                url: 'https://serpapi.com/?utm_source=vitedev',
+                img: 'https://sponsors.vite.dev/images/serpapi.png',
+              },
+            ],
+          },
+          {
+            tier: 'Gold Sponsors',
+            size: 'medium',
+            items: [
+              {
+                name: 'Mux',
+                url: 'https://mux.com?ref=vitejs',
+                img: 'https://sponsors.vite.dev/images/mux.svg',
+              },
+              {
+                name: 'Nx',
+                url: 'https://nx.dev/',
+                img: 'https://sponsors.vite.dev/images/nx.svg',
+              },
+              {
+                name: 'Transloadit',
+                url: 'https://transloadit.com',
+                img: 'https://sponsors.vite.dev/images/transloadit.png',
+              },
+              {
+                name: 'Handsontable',
+                url: 'https://handsontable.com/docs/react-data-grid/?utm_source=vite_docs&utm_medium=sponsorship&utm_campaign=library_sponsorship_2024',
+                img: 'https://sponsors.vite.dev/images/handsontable.svg',
+              },
+              {
+                name: 'Mojam',
+                url: 'https://mojam.co/',
+                img: 'https://sponsors.vite.dev/images/mojam.svg',
+              },
+              {
+                name: 'Convex',
+                url: 'https://convex.dev',
+                img: 'https://sponsors.vite.dev/images/convex.svg',
+              },
+              {
+                name: 'Zephyr Cloud IO',
+                url: 'https://zephyr-cloud.io',
+                img: 'https://sponsors.vite.dev/images/zephyr_cloud.png',
+              },
+              {
+                name: 'Catalyst by Zoho',
+                url: 'https://catalyst.zoho.com/slate/?utm_source=vite.js&utm_medium=sponsorship&utm_campaign=paid',
+                img: 'https://sponsors.vite.dev/images/catalyst.svg',
+              },
+              {
+                name: 'Sanity',
+                url: 'https://www.sanity.io/',
+                img: 'https://sponsors.vite.dev/images/sanity.svg',
+              },
+              {
+                name: 'Follower24',
+                url: 'https://www.follower24.de/',
+                img: 'https://sponsors.vite.dev/images/follower24.svg',
+              },
+              {
+                name: 'Fortuna',
+                url: 'https://hirefortuna.com',
+                img: 'https://images.opencollective.com/hirefortuna/b1906f3/logo/460.png',
+              },
+              {
+                name: 'Aerius Ventilation AB',
+                url: 'https://aerius.se',
+                img: 'https://avatars.githubusercontent.com/u/107723282?u=2639caa14ce293a0b6202c5766a40bb99ac9697e&v=4',
+              },
+              {
+                name: 'BairesDev',
+                url: 'https://bairesdev.com/sponsoring-open-source-projects',
+                img: 'https://images.opencollective.com/bairesdev/48bb773/logo/460.png',
+              },
+            ],
+          },
+        ]}
+      />
+      <Spacer />
+      <Footer
+        heading="Start building with Zustand"
+        subheading="Prepare for a development environment that can finally keep pace with the speed of your mind."
+        buttonText="Get Started"
+        buttonLink="/guide/"
+      />
+    </div>
+  )
+}

@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typography tokens */
+  --font-*: initial;
+  --font-heading: 'APK Protocol', sans-serif;
+  --font-sans: Inter, sans-serif;
+  --font-mono: 'KH Teka Mono', monospace;
+
+  /* Color palette */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-primary: #16171d;
+  --color-beige: #f4f3ec;
+  --color-nickel: #3b3440;
+  --color-grey: #867e8e;
+  --color-stroke: #e5e4e7;
+  --color-midnight: #0c0912;
+  --color-slate: #14121a;
+  --color-ruby: #863bff;
+  --color-wine: #140033;
+  --color-violet: #140033;
+  --color-plum: #1d0033;
+  --color-electric: #6c3bff;
+  --color-vite: #b39aff;
+  --color-space: #110033;
+  --color-zest: #22ff73;
+  --color-forest: #002611;
+  --color-fire: #ff5500;
+  --color-rust: #260001;
+  --color-aqua: #32f3e9;
+  --color-sea: #002624;
+
+  --animate-lg-marquee: lg-marquee 24s linear infinite;
+
+  @keyframes lg-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes move-background {
+    0%,
+    to {
+      background-position: 40% 40%;
+    }
+    50% {
+      background-position: 60% 60%;
+    }
+  }
+}

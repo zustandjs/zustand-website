@@ -1,9 +1,16 @@
+import path from 'node:path'
+import { pluginTailwindcss } from '@rsbuild/plugin-tailwindcss'
 import { defineConfig } from '@rspress/core'
 import { transformerCompatibleMetaHighlight } from '@rspress/core/shiki-transformers'
 import { pluginPreview } from '@rspress/plugin-preview'
 import { pluginPlayground } from '@rspress/plugin-playground'
 
 export default defineConfig({
+  root: path.join(__dirname, 'docs'),
+  globalStyles: path.join(__dirname, 'tailwind.css'),
+  builderConfig: {
+    plugins: [pluginTailwindcss()],
+  },
   llms: true,
   markdown: {
     shiki: {
@@ -15,7 +22,6 @@ export default defineConfig({
     },
   },
   plugins: [pluginPreview(), pluginPlayground()],
-  root: 'docs',
   title: 'Zustand Docs',
   description: 'A multilingual Rspress documentation site.',
   lang: 'en',

@@ -16,15 +16,18 @@
     "@rspress/core": "^2.0.14"
   },
   "devDependencies": {
+    "@rsbuild/plugin-tailwindcss": "^2.0.3",
     "@rspress/plugin-llms": "^2.0.15",
     "@rspress/plugin-playground": "^2.0.15",
     "@rspress/plugin-preview": "^2.0.15",
     "@types/node": "^22.8.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "cnfast": "^0.0.8",
     "oxfmt": "^0.57.0",
     "oxlint": "^1.72.0",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "tailwindcss": "^4.3.2"
   }
 }

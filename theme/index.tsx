@@ -1,9 +1,6 @@
 import './index.css'
-import { HomeLayout as BasicHomeLayout, PackageManagerTabs } from '@rspress/core/theme-original'
+import { Layout } from './components/layout'
+import { HomeLayout } from './components/home-layout'
 
-export default function HomeLayout() {
-  return <BasicHomeLayout afterHeroActions={<PackageManagerTabs command="install zustand" />} />
-}
-
-export { HomeLayout }
+export { Layout, HomeLayout }
 export * from '@rspress/core/theme-original'
