@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSite } from '@rspress/core/runtime' // Rspress v1: `import { useSiteData } from 'rspress/runtime'`
 import { Wrapper } from './wrapper'
+import type { NavItem, SocialLink } from '@rspress/core'
 // import { Icon } from '@iconify/react'
 
 // Social icon name mapping
@@ -21,12 +22,6 @@ interface FooterColumn {
   items: FooterLink[]
 }
 
-interface SocialLink {
-  icon: string
-  link: string
-  label?: string
-}
-
 export interface FooterConfig {
   message?: string
   copyright?: string
@@ -36,7 +31,6 @@ export interface FooterConfig {
 
 // Get display label for social link
 const getSocialLabel = (social: SocialLink): string => {
-  if (social.label) return social.label
   const labels: Record<string, string> = {
     github: 'GitHub',
     discord: 'Discord',
@@ -44,40 +38,23 @@ const getSocialLabel = (social: SocialLink): string => {
     twitter: 'X.com',
     x: 'X.com',
   }
-  return labels[social.icon.toLowerCase()] || social.icon
+  return labels[social.icon as string] || (social.icon as string)
 }
 
 export function FooterNav() {
   const { site } = useSite() // Rspress v1: `const site = useSiteData()`
+  const footerCopyright = `© ${new Date().getFullYear()} Zustand. All Rights Reserved.`
 
-  // Rspress's built-in `themeConfig.footer` type is just `{ message?: string }`,
-  // so the extended nav/social shape lives there as a custom field — cast it.
-  const footer = ((site.themeConfig as Record<string, unknown>).footer ?? {}) as FooterConfig
-
-  const footerNav = footer.nav ?? [
+  const footerNav = [
     {
-      title: 'vite',
-      items: [
-        {
-          text: 'Guide',
-          link: '/guide/',
-        },
-      ],
-    },
-    { title: 'resources', items: [] },
-    { title: 'versions', items: [] },
-  ]
-  const footerSocial = footer.social ?? [
-    {
-      label: 'GitHub',
-      link: '',
+      text: site.logoText,
+      link: site.base,
+      // oxlint-disable-next-line no-unsafe-optional-chaining
+      items: (site.themeConfig.locales[0].nav?.default as unknown as NavItem[]).filter(
+        (item) => !item.text?.startsWith('v'),
+      ),
     },
   ]
-
-  const footerCopyright = useMemo(
-    () => footer.copyright || `© ${new Date().getFullYear()} VoidZero Inc. All Rights Reserved.`,
-    [footer.copyright],
-  )
 
   return (
     <div>
@@ -85,12 +62,12 @@ export function FooterNav() {
         <div className="px-5 md:px-24 pt-10 md:pt-16 pb-16 md:pb-40 flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between">
           <div className="flex flex-col md:flex-row gap-10 md:gap-20">
             {footerNav.map((column) => (
-              <div key={column.title}>
+              <div key={column.link}>
                 <p className="text-[var(--vp-c-text-2)] text-xs font-mono uppercase tracking-wide mb-8">
-                  {column.title}
+                  {column.text}
                 </p>
                 <ul className="flex flex-col gap-3">
-                  {column.items.map((item) => (
+                  {column.items?.map((item) => (
                     <li key={item.link}>
                       <a href={item.link} className="text-[var(--vp-c-text-1)] text-base">
                         {item.text}
@@ -102,16 +79,16 @@ export function FooterNav() {
             ))}
           </div>
 
-          {footerSocial.length > 0 && (
+          {site.themeConfig.socialLinks?.length ? (
             <div>
               <p className="text-[var(--vp-c-text-2)] text-xs font-mono uppercase tracking-wide mb-8">
                 Social
               </p>
               <ul className="flex flex-col gap-3">
-                {footerSocial.map((social) => (
-                  <li key={social.link}>
+                {site.themeConfig.socialLinks.map((social) => (
+                  <li key={social.content}>
                     <a
-                      href={social.link}
+                      href={social.content}
                       className="text-[var(--vp-c-text-1)] text-base flex gap-3 items-center"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -127,7 +104,7 @@ export function FooterNav() {
                 ))}
               </ul>
             </div>
-          )}
+          ) : null}
         </div>
       </Wrapper>
 
