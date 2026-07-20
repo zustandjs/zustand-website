@@ -1,17 +1,7 @@
-import { useMemo } from 'react'
-import { useSite } from '@rspress/core/runtime' // Rspress v1: `import { useSiteData } from 'rspress/runtime'`
+import { useSite } from '@rspress/core/runtime'
 import { Wrapper } from './wrapper'
 import type { NavItem, SocialLink } from '@rspress/core'
-// import { Icon } from '@iconify/react'
 
-// Social icon name mapping
-const socialIconName = (icon: string): string => {
-  const key = icon.toLowerCase()
-  if (key === 'twitter') return 'simple-icons:x'
-  return `simple-icons:${key}`
-}
-
-// Footer configuration types
 interface FooterLink {
   text: string
   link: string
@@ -42,7 +32,7 @@ const getSocialLabel = (social: SocialLink): string => {
 }
 
 export function FooterNav() {
-  const { site } = useSite() // Rspress v1: `const site = useSiteData()`
+  const { site } = useSite()
   const footerCopyright = `© ${new Date().getFullYear()} Zustand. All Rights Reserved.`
 
   const footerNav = [
