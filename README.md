@@ -1,4 +1,4 @@
-# Rspress website
+# Zustand Website
 
 ## Setup
 
