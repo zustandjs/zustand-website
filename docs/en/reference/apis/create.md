@@ -39,9 +39,11 @@ create<T>()(stateCreatorFn: StateCreator<T, [], []>): UseBoundStore<StoreApi<T>>
 #### Parameters
 
 - `stateCreatorFn`: A function that takes `set` function, `get` function and `store` as arguments.
-  Usually, you will return an object with the methods you want to expose. Note that `set`, `get` and
-  `store` must not be called synchronously during initialization — they are only safe to call after
-  the store has been created (e.g., from within action methods).
+  Usually, you will return an object with the methods you want to expose.
+
+> [!NOTE]
+> `set`, `get` and `store` must not be called synchronously during initialization — they are only
+> safe to call after the store has been created (e.g., from within action methods).
 
 #### Returns
 
