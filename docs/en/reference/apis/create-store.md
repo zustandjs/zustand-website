@@ -39,6 +39,10 @@ createStore<T>()(stateCreatorFn: StateCreator<T, [], []>): StoreApi<T>
 - `stateCreatorFn`: A function that takes `set` function, `get` function and `store` as arguments.
   Usually, you will return an object with the methods you want to expose.
 
+> [!CAUTION]
+> `set`, `get` and `store` must not be called synchronously during initialization — they are only
+> safe to call after the store has been created (e.g., from within action methods).
+
 #### Returns
 
 `createStore` returns a vanilla store that exposes API utilities, `setState`, `getState`,
@@ -217,7 +221,7 @@ By default, `set` function performs a shallow merge. To update array values we s
 values to ensure updates are applied correctly, and avoid unexpected behaviors. To completely
 replace the state with a new one, use the `replace` parameter set to `true`.
 
-> [!WARNING]
+> [!CAUTION]
 > We should prefer immutable operations like: `[...array]`, `concat(...)`, `filter(...)`,
 > `slice(...)`, `map(...)`, `toSpliced(...)`, `toSorted(...)`, and `toReversed(...)`, and avoid
 > mutable operations like `array[arrayIndex] = ...`, `push(...)`, `unshift(...)`, `pop(...)`,
