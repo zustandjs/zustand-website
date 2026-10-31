@@ -9,7 +9,7 @@ If you want to connect state of a store to URL hash, you can create your own has
 
 ```ts
 import { create } from 'zustand'
-import { persist, StateStorage, createJSONStorage } from 'zustand/middleware'
+import { persist, type StateStorage, createJSONStorage } from 'zustand/middleware'
 
 const hashStorage: StateStorage = {
   getItem: (key): string => {
@@ -29,7 +29,12 @@ const hashStorage: StateStorage = {
   },
 }
 
-export const useBoundStore = create()(
+type BoundState = {
+  fishes: number
+  addAFish: () => void
+}
+
+export const useBoundStore = create<BoundState>()(
   persist(
     (set, get) => ({
       fishes: 0,
@@ -55,7 +60,7 @@ The implementation below will update the URL in place, without refresh, as the r
 
 ```ts
 import { create } from 'zustand'
-import { persist, StateStorage, createJSONStorage } from 'zustand/middleware'
+import { persist, type StateStorage, createJSONStorage } from 'zustand/middleware'
 
 const getUrlSearch = () => {
   return window.location.search.slice(1)
