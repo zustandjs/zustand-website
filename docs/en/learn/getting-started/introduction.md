@@ -36,9 +36,11 @@ npm install zustand
 
 ## First create a store
 
-Your store is a hook!
-You can put anything in it: primitives, objects, functions.
-The `set` function _merges_ state.
+The `create` function creates a store and returns a React hook
+that you can use to access it.
+
+Your store can contain both state and actions.
+State holds your data, while actions are functions that update it.
 
 ```js
 import { create } from 'zustand'
@@ -51,11 +53,23 @@ const useBear = create((set) => ({
 }))
 ```
 
+In this example, `bears` is the state, and `increasePopulation`,
+`removeAllBears`, and `updateBears` are the actions.
+
+The `set` function shallowly merges updates into the existing state
+by default, so you only need to provide the properties you want to update.
+When an update depends on the previous state,
+pass a function to `set`, as shown in `increasePopulation`.
+
 ## Then bind your components, and that's it!
 
-You can use the hook anywhere, without the need of providers.
-Select your state and the consuming component
-will re-render when that state changes.
+You can use the store hook in your React components
+without wrapping them in a provider.
+
+A selector is a function that picks the part of the store
+your component needs. By default, Zustand uses `Object.is`
+to compare the previous and next selector results
+and triggers a re-render when the selected value changes.
 
 ```jsx
 function BearCounter() {
@@ -65,6 +79,30 @@ function BearCounter() {
 
 function Controls() {
   const increasePopulation = useBear((state) => state.increasePopulation)
-  return <button onClick={increasePopulation}>one up</button>
+  const removeAllBears = useBear((state) => state.removeAllBears)
+
+  return (
+    <>
+      <button onClick={increasePopulation}>one up</button>
+      <button onClick={removeAllBears}>reset</button>
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <>
+      <BearCounter />
+      <Controls />
+    </>
+  )
 }
 ```
+
+Both components use the same store.
+When you click the `one up` button, `increasePopulation`
+updates the bear population, and `BearCounter` displays the new value.
+Clicking `reset` sets the population back to zero.
+
+Since `Controls` only selects actions, changes to `bears`
+do not cause it to re-render through its store subscriptions.
